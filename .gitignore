@@ -1,0 +1,5 @@
+.DS_Store
+BingWallpaper.app/
+install_root/
+bing-wallpaper
+*.pkg

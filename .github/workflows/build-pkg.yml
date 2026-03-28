@@ -1,0 +1,52 @@
+name: Build macOS PKG
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.21'
+    
+    - name: Build Go binary
+      run: |
+        go build -ldflags "-s -w" -o bing-wallpaper main.go
+    
+    - name: Create App Bundle Structure
+      run: |
+        mkdir -p BingWallpaper.app/Contents/MacOS
+        mkdir -p BingWallpaper.app/Contents/Resources
+        cp bing-wallpaper BingWallpaper.app/Contents/MacOS/BingWallpaper
+        cp Info.plist BingWallpaper.app/Contents/Info.plist
+        chmod +x BingWallpaper.app/Contents/MacOS/BingWallpaper
+
+    - name: Setup PKG Install Root
+      # Puts the app in the standard Applications folder upon installation
+      run: |
+        mkdir -p install_root/Applications
+        mv BingWallpaper.app install_root/Applications/
+    
+    - name: Use pkgbuild to pack the payload
+      run: |
+        pkgbuild --root install_root \
+                 --identifier com.gabhain.bingwallpaper \
+                 --version 1.0.0 \
+                 --install-location / \
+                 BingWallpaper-macOS.pkg
+
+    - name: Upload PKG as GitHub Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: BingWallpaper-macOS.pkg
+        path: BingWallpaper-macOS.pkg
