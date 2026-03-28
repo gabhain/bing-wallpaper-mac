@@ -23,7 +23,7 @@ pkg: app
 	cp -r $(APP_BUNDLE) $(INSTALL_ROOT)/Applications/
 	pkgbuild --root $(INSTALL_ROOT) \
 			 --identifier com.gabhain.bingwallpaper \
-			 --version 1.0.0 \
+			 --version 1.0.2 \
 			 --install-location / \
 			 $(PKG_NAME)
 	@echo "$(PKG_NAME) created successfully."
