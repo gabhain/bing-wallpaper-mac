@@ -1,21 +1,21 @@
 # Bing Wallpaper for macOS 🌅
 
-A lightweight, completely native macOS application written in Go that automatically fetches the daily Ultra High-Resolution (UHD) Bing Wallpaper, saves it, and seamlessly sets it as your desktop background without dropping a single icon in your dock!
+A simple macOS app written in Go that fetches the daily Bing Wallpaper and sets it as your desktop background.
 
 ## Features
 
-- **Native macOS Execution:** The compiled Go binary is packaged cleanly into a `.app` bundle.
-- **Headless Action:** Defined as an `LSUIElement`, clicking the app executes the logic completely invisibly in the background without popping up terminals or Dock icons.
-- **Highest Quality:** Automatically grabs the `_UHD.jpg` endpoint straight from the Microsoft Image API for maximum crispness.
+- Built as a native macOS `.app` bundle containing a Go executable.
+- Runs invisibly in the background.
+- Downloads the high-resolution (`_UHD.jpg`) image from the Bing API.
 
 ## How it works
-On launch, the tool pulls the JSON payload from the Bing Image Archive API. It checks if the wallpaper has already been downloaded to `~/Pictures/BingWallpapers` today. If not, it saves it cleanly and uses macOS `System Events` (via `osascript`) to set it across all active desktop spaces.
+When opened, the app reads the Bing Image Archive API. If today's wallpaper isn't already saved in `~/Pictures/BingWallpapers`, it downloads the image and uses macOS System Events to update the background of all desktop spaces.
 
 ## User Experience 
-When you actually install and run the app, the experience is incredibly sleek and completely invisible—meaning it won't interrupt your workflow:
-1. **Zero visual clutter:** Because the app is configured as an invisible background process, an application icon will **not** bounce in your Dock, and no terminal window will pop open. 
-2. **One-Time Security Check:** The very first time it is ever run, macOS's privacy system will pop up a single standard alert box that says: `"BingWallpaper" would like to control the application "System Events".` Simply click **OK** *(It never asks tracking permissions again).*
-3. **The Magic:** A split-second later, your desktop background instantly fades into the new Ultra High-Res Bing image! As soon as the wallpaper is set, the app instantly terminates itself completely, using 0% system resources going forward.
+When you run the app, it works quietly in the background without interrupting you:
+1. **No Dock icons or popups:** The app is configured as a background process (`LSUIElement`), so you won't see a terminal window or a Dock icon.
+2. **One-Time Permissions Check:** The first time it runs, macOS will ask `"BingWallpaper" would like to control "System Events".` You just need to click **OK** so it has permission to change your desktop.
+3. **Result:** Your desktop background will update to the latest Bing image, and the app will exit immediately.
 
 ## Installation & Packaging
 
