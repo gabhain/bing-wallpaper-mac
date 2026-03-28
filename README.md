@@ -2,6 +2,9 @@
 
 A simple macOS app written in Go that fetches the daily Bing Wallpaper and sets it as your desktop background.
 
+> [!NOTE]  
+> This was created mostly as an excuse to play with go and github actions.
+
 ## Features
 
 - Built as a native macOS `.app` bundle containing a Go executable.
@@ -12,7 +15,7 @@ A simple macOS app written in Go that fetches the daily Bing Wallpaper and sets 
 When opened, the app reads the Bing Image Archive API. If today's wallpaper isn't already saved in `~/Pictures/BingWallpapers`, it downloads the image and uses macOS System Events to update the background of all desktop spaces.
 
 ## User Experience 
-When you run the app, it works quietly in the background without interrupting you:
+When you run the app, it works quietly in the background without interrupting you. This is so it can be added as a login item and have the wallpaper changed on boot. 
 1. **No Dock icons or popups:** The app is configured as a background process (`LSUIElement`), so you won't see a terminal window or a Dock icon.
 2. **One-Time Permissions Check:** The first time it runs, macOS will ask `"BingWallpaper" would like to control "System Events".` You just need to click **OK** so it has permission to change your desktop.
 3. **Result:** Your desktop background will update to the latest Bing image, and the app will exit immediately.
