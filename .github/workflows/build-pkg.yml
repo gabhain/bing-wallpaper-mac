@@ -12,7 +12,7 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
     - name: Set up Go
       uses: actions/setup-go@v4
@@ -46,7 +46,7 @@ jobs:
                  BingWallpaper-macOS.pkg
 
     - name: Upload PKG as GitHub Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: BingWallpaper-macOS.pkg
         path: BingWallpaper-macOS.pkg
