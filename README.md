@@ -11,6 +11,12 @@ A lightweight, completely native macOS application written in Go that automatica
 ## How it works
 On launch, the tool pulls the JSON payload from the Bing Image Archive API. It checks if the wallpaper has already been downloaded to `~/Pictures/BingWallpapers` today. If not, it saves it cleanly and uses macOS `System Events` (via `osascript`) to set it across all active desktop spaces.
 
+## User Experience 
+When you actually install and run the app, the experience is incredibly sleek and completely invisible—meaning it won't interrupt your workflow:
+1. **Zero visual clutter:** Because the app is configured as an invisible background process, an application icon will **not** bounce in your Dock, and no terminal window will pop open. 
+2. **One-Time Security Check:** The very first time it is ever run, macOS's privacy system will pop up a single standard alert box that says: `"BingWallpaper" would like to control the application "System Events".` Simply click **OK** *(It never asks tracking permissions again).*
+3. **The Magic:** A split-second later, your desktop background instantly fades into the new Ultra High-Res Bing image! As soon as the wallpaper is set, the app instantly terminates itself completely, using 0% system resources going forward.
+
 ## Installation & Packaging
 
 You can rely on the automated GitHub Actions to build the `.pkg` installer for you, or you can build it yourself using the included `Makefile`.
@@ -31,3 +37,6 @@ make pkg
 # To clean up compiling artifacts:
 make clean
 ```
+
+## License
+This project is officially licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
