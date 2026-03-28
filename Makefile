@@ -13,6 +13,7 @@ app: build
 	mkdir -p $(APP_BUNDLE)/Contents/Resources
 	cp bing-wallpaper $(APP_BUNDLE)/Contents/MacOS/$(APP_NAME)
 	cp Info.plist $(APP_BUNDLE)/Contents/Info.plist
+	cp AppIcon.icns $(APP_BUNDLE)/Contents/Resources/AppIcon.icns
 	chmod +x $(APP_BUNDLE)/Contents/MacOS/$(APP_NAME)
 	@echo "App bundle $(APP_BUNDLE) created successfully."
 
