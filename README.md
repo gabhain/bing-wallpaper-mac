@@ -18,7 +18,7 @@ When you launch the app, it checks the Bing Image Archive. If you don't already 
 I designed this to be "set it and forget it." Since it's a background process (`LSUIElement`), it won't clutter up your Dock.
 
 1. **Permissions:** The very first time you run it, macOS will ask if `BingWallpaper` can control `System Events`. Just click **OK**—that's how it gets the permission it needs to change your wallpaper.
-2. **Login Item:** The best way to use it is to add it as a login item. That way, every time you boot up your Mac, your wallpaper is already updated and waiting for you.
+2. **Login Item:** The app is automatically added as a login item when you install the `.pkg`. This ensures your wallpaper is refreshed every time you log in.
 3. **Outcome:** Your desktop gets a beautiful new look, and the app closes itself immediately. Simple as that.
 
 ## Installation & Packaging
@@ -26,7 +26,7 @@ I designed this to be "set it and forget it." Since it's a background process (`
 You can either let GitHub Actions do the heavy lifting or build it yourself if you're feeling hands-on.
 
 ### 1. Use the pre-built installer (The Easy Way)
-Whenever I push changes, GitHub Actions automatically builds a `.pkg` installer. You can find it under the **Actions** tab. Just download it, run it, and it'll drop `BingWallpaper.app` right into your `/Applications` folder.
+Whenever I push changes, GitHub Actions automatically builds a `.pkg` installer. You can find it under the **Actions** tab. The installer now includes a post-install script that adds `BingWallpaper.app` to your login items automatically. Just download it, run it, and it'll drop the app right into your `/Applications` folder.
 
 ### 2. Build it yourself (The Dev Way)
 If you've got Go installed (`brew install go`), you can build the app or the installer package directly from your terminal using the `Makefile`:

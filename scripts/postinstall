@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Path to the app
+APP_PATH="/Applications/BingWallpaper.app"
+
+# Check if the app exists
+if [ -d "$APP_PATH" ]; then
+    # Get the current logged-in user
+    CURRENT_USER=$(stat -f "%Su" /dev/console)
+    
+    if [ "$CURRENT_USER" != "root" ] && [ "$CURRENT_USER" != "" ]; then
+        echo "Adding $APP_PATH to login items for user $CURRENT_USER"
+        
+        # We use sudo -u to run it as the logged-in user
+        # This will add it to the "Login Items" in System Settings
+        sudo -u "$CURRENT_USER" osascript -e "tell application \"System Events\"
+            if not (exists (login item \"BingWallpaper\")) then
+                make login item at end with properties {path:\"$APP_PATH\", name:\"BingWallpaper\", hidden:false}
+            end if
+        end tell"
+    else
+        echo "No active user logged into console. Skipping login item addition."
+    fi
+else
+    echo "App bundle not found at $APP_PATH. Skipping login item addition."
+fi
+
+exit 0

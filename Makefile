@@ -25,6 +25,7 @@ pkg: app
 			 --identifier com.gabhain.bingwallpaper \
 			 --version 1.0.2 \
 			 --install-location / \
+			 --scripts scripts \
 			 $(PKG_NAME)
 	@echo "$(PKG_NAME) created successfully."
 
